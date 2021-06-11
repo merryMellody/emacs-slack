@@ -715,9 +715,9 @@
   (make-instance 'slack-image-block-element
                  :image_url (plist-get payload :image_url)
                  :alt_text (plist-get payload :alt_text)
-                 :image_height (plist-get payload :image_height)
-                 :image_width (plist-get payload :image_width)
-                 :image_bytes (plist-get payload :image_bytes)))
+                 :image_height (or (plist-get payload :image_height) 0)
+                 :image_width (or (plist-get payload :image_width) 0)
+                 :image_bytes (or (plist-get payload :image_bytes) 0)))
 
 (cl-defmethod slack-block-to-string ((this slack-image-block-element) &optional option)
   (with-slots (image-url image-height image-width) this
